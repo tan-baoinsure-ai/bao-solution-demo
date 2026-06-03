@@ -1,0 +1,247 @@
+/* ============================================================
+   Budha&Co — Vegan Asian, Sydney
+   Design system: warm cream · olive green · earthy red
+   Type: Cormorant Garamond (display serif) + Jost (sans)
+   ============================================================ */
+
+:root {
+  /* Brand palette */
+  --green:       #666600;   /* olive — primary brand */
+  --green-deep:  #4a4a00;
+  --green-dark:  #2e2e07;   /* deep olive, near-black bands */
+  --red:         #b34700;   /* earthy red — CTA / accent */
+  --red-deep:    #8f3800;
+  --cream:       #f7f0e0;   /* very light beige — page bg */
+  --beige:       # efe5d0;
+  --beige-2:     #eadfc6;
+  --white:       #ffffff;
+  --ink:         #23230f;   /* primary text */
+  --ink-soft:    #54543a;   /* secondary text */
+  --line:        #ddd2b6;   /* hairline on cream */
+
+  /* Type */
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans:  "Jost", system-ui, -apple-system, sans-serif;
+
+  /* Spacing rhythm */
+  --pad-x: clamp(20px, 6vw, 120px);
+  --maxw: 1280px;
+
+  /* Effects */
+  --shadow-sm: 0 2px 10px rgba(46, 46, 7, 0.06);
+  --shadow-md: 0 14px 40px rgba(46, 46, 7, 0.12);
+  --shadow-lg: 0 30px 80px rgba(46, 46, 7, 0.20);
+  --radius: 18px;
+}
+
+/* fix stray space in var fallback above */
+:root { --beige: #efe5d0; }
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.02;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--red); color: var(--cream); }
+
+/* ---------- Layout helpers ---------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad-x); }
+
+section { position: relative; }
+
+.section-pad { padding-block: clamp(72px, 11vw, 150px); }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 22px;
+}
+.eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 1.5px;
+  background: var(--red);
+  display: inline-block;
+}
+.eyebrow.center { justify-content: center; }
+.eyebrow.center::after {
+  content: "";
+  width: 30px;
+  height: 1.5px;
+  background: var(--red);
+  display: inline-block;
+}
+
+.display {
+  font-size: clamp(2.6rem, 6.4vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.display .it { font-style: italic; font-weight: 500; }
+
+h2.title { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
+.lede { font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--ink-soft); max-width: 60ch; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 999px;
+  padding: 15px 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn:active { transform: translateY(1px) scale(.99); }
+.btn-primary { background: var(--red); color: var(--cream); }
+.btn-primary:hover { background: var(--red-deep); box-shadow: var(--shadow-md); }
+.btn-dark { background: var(--green-dark); color: var(--cream); }
+.btn-dark:hover { background: #000; }
+.btn-ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--cream); }
+.btn-ghost.on-dark { color: var(--cream); box-shadow: inset 0 0 0 1.5px rgba(247,240,224,.55); }
+.btn-ghost.on-dark:hover { background: var(--cream); color: var(--ink); }
+.btn-sm { padding: 11px 20px; font-size: 14px; }
+.btn-lg { padding: 18px 38px; font-size: 16px; }
+
+/* ---------- Seal / chop stamp motif ---------- */
+.seal {
+  font-family: var(--serif);
+  display: inline-grid;
+  place-items: center;
+  background: var(--red);
+  color: var(--cream);
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 0 0 3px var(--red), inset 0 0 0 2px rgba(247,240,224,.55);
+  line-height: 1;
+  user-select: none;
+}
+
+/* Chinese decorative glyph accent */
+.cn {
+  font-family: var(--serif);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: .1em;
+  line-height: 1;
+}
+
+/* ---------- Image slot styling ---------- */
+image-slot {
+  --slot-bg: linear-gradient(135deg, var(--beige-2), var(--beige));
+  color: rgba(53, 53, 20, .5);
+  width: 100%;
+  height: 100%;
+  /* Consistent house grade: warm, rich and a touch saturated so every
+     photo — whatever its source — reads as one salivating, colorful set. */
+  filter: saturate(1.18) contrast(1.045) brightness(1.015);
+}
+image-slot::part(frame) {
+  background: var(--slot-bg);
+}
+image-slot::part(ring) {
+  border-color: rgba(120, 90, 30, .28);
+}
+
+/* A decorative figure-frame wrapper so empty slots still read as "designed" */
+.photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+/* Warm tonal wash unifies disparate photography into the brand palette */
+.photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(155deg, rgba(179,71,0,.10), rgba(102,102,0,.05) 55%, rgba(35,35,15,.14));
+  mix-blend-mode: multiply;
+}
+.photo .tag {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 3;
+  background: rgba(35,35,15,.72);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: .04em;
+  padding: 7px 13px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* ---------- Divider rule with glyph ---------- */
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--green);
+}
+.rule::before, .rule::after {
+  content: "";
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
