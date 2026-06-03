@@ -9,6 +9,7 @@ COPY index.html /usr/share/nginx/html/index.html
 
 COPY em-tho/      /usr/share/nginx/html/em-tho
 COPY banh-barber/ /usr/share/nginx/html/banh-barber
+COPY bhuda/       /usr/share/nginx/html/bhuda
 
 # COPY em-tho/dist      /usr/share/nginx/html/em-tho
 # COPY banh-barber/dist /usr/share/nginx/html/banh-barber

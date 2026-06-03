@@ -20,21 +20,33 @@ A single-host nginx portal serving multiple independent demo apps under `bao.dem
 ```
 bao.demo.vn/
 ├── /                 → index.html (landing page — plain HTML)
-├── /em-tho/          → em-tho/dist/ (Vite + React SPA)
-├── /banh-barber/     → banh-barber/dist/ (Vite + React SPA)
+├── /em-tho/          → em-tho/ (static HTML + CSS + image)
+├── /banh-barber/     → banh-barber/ (static HTML + CSS + image)
+├── /bhuda/           → bhuda/ (React 18 via CDN + Babel in-browser, no build)
 └── /health           → 200 ok  (nginx health check)
 ```
 
-All apps are served by a single **nginx:stable-alpine** container. Each app is built independently with Vite and its `dist/` folder is copied into the Docker image.
+All apps are served by a single **nginx:stable-alpine** container. There are two app types:
+
+- **Static HTML** — folder is copied directly into the image; no build step needed.
+- **Vite SPA** — must be built with `pnpm build` first; only the `dist/` folder goes into the image.
 
 Key files:
 
 | File | Purpose |
 |------|---------|
 | `nginx.conf` | Context-path routing — one `location` block per app |
-| `Dockerfile` | Multi-stage build; copies each app's dist |
+| `Dockerfile` | Copies each app folder (or dist/) into the image |
 | `index.html` | Landing page listing all demos |
 | `Makefile` | `docker-build` / `docker-run` shortcuts |
+
+### Live projects
+
+| Path | Folder type | Tech |
+|------|-------------|------|
+| `/em-tho` | Static HTML | Plain HTML/CSS |
+| `/banh-barber` | Static HTML | Plain HTML/CSS |
+| `/bhuda` | Static HTML | React 18 CDN + Babel standalone |
 
 ---
 

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Purpose
 
-`bao-demo` is a single-host nginx portal serving multiple independent React/Vite demo apps under `bao.demo.vn`. Each app is accessible at its own context path (e.g. `/em-tho`, `/banh-barber`). The root path serves a plain-HTML landing page.
+`bao-demo` is a single-host nginx portal serving multiple independent demo apps under `bao.demo.vn`. Each app is accessible at its own context path. The root path serves a plain-HTML landing page listing all live demos.
 
 ## Architecture
 
@@ -12,11 +12,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 bao-demo/
 ├── index.html        # Landing page (plain HTML, no framework)
 ├── nginx.conf        # Context-path routing — one location block per app
-├── Dockerfile        # nginx:stable-alpine; each app's dist is COPY'd in
-└── Makefile          # docker-build / docker-run shortcuts
+├── Dockerfile        # nginx:stable-alpine; each app folder is COPY'd in
+├── Makefile          # docker-build / docker-run shortcuts
+├── em-tho/           # Static HTML — plain HTML + CSS + image
+├── banh-barber/      # Static HTML — plain HTML + CSS + image
+└── bhuda/            # Static HTML — React via CDN + Babel in-browser (no build step)
 ```
 
-Each app lives in its own folder at the root (e.g. `em-tho/`) and is built independently before being included in the Docker image.
+## Live Projects
+
+| Path | Type | Notes |
+|------|------|-------|
+| `/em-tho` | Static HTML | Plain HTML/CSS, image: `MER-87.jpg` |
+| `/banh-barber` | Static HTML | Plain HTML/CSS, image: `MER-187.jpg` |
+| `/bhuda` | React via CDN | React 18 + Babel standalone, no build needed. Budha&Co vegan restaurant (Sydney). Files: `data.js`, `ui.jsx`, `sections1.jsx`, `sections2.jsx`, `shop.jsx`, `styles.css`, `layout.css` |
+
+## Two App Types
+
+**Static HTML** (em-tho, banh-barber, bhuda): copy folder directly — no build step.
+
+**Vite SPA** (future): must run `pnpm build` first; Dockerfile copies `dist/` not the source folder.
 
 ## Commands
 
@@ -25,13 +40,19 @@ make docker-build     # Build the production Docker image (bao-demo:latest)
 make docker-run       # Run locally at http://localhost:8080
 ```
 
-## Adding a New App — Required Steps (do all four or it breaks)
+## Adding a New App — Required Steps
 
+### Static HTML app (no build step)
+1. **Dockerfile** — add `COPY <name>/ /usr/share/nginx/html/<name>`
+2. **nginx.conf** — add a `location ^~ /<name>` block (copy existing block)
+3. **index.html** — add a card link in `.grid`
+
+### Vite SPA
 1. **Vite config** — set `base: '/project-name/'` (trailing slash required)
 2. **TanStack Router** — set `basepath: '/project-name'` in `createRouter()` (no trailing slash)
-3. **Dockerfile** — uncomment/add the COPY line for the app's dist folder
-4. **nginx.conf** — add a `location ^~ /project-name` block (copy the template comment)
-5. **index.html** — add a card link for the landing page
+3. **Dockerfile** — add `COPY <name>/dist /usr/share/nginx/html/<name>`
+4. **nginx.conf** — add a `location ^~ /<name>` block
+5. **index.html** — add a card link in `.grid`
 
 ## Critical nginx Gotchas
 
