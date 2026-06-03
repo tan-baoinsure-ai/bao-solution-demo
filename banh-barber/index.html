@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banh Barber</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #0d0d0d;
+        color: #e0e0e0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 70vh;
+        overflow: hidden;
+      }
+
+      .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+        filter: grayscale(20%);
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+        display: flex;
+        align-items: flex-end;
+        padding: 2.5rem;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #fff;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+
+      .hero-text .tagline {
+        margin-top: 0.4rem;
+        font-size: 0.9rem;
+        color: #c9a84c;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-weight: 600;
+      }
+
+      .content {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        width: 100%;
+      }
+
+      .section-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #c9a84c;
+        margin-bottom: 1.25rem;
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: #1e1e1e;
+        border: 1px solid #1e1e1e;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 2.5rem;
+      }
+
+      .service-item {
+        background: #141414;
+        padding: 1.5rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .service-name {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #e0e0e0;
+      }
+
+      .service-price {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #c9a84c;
+      }
+
+      .divider {
+        width: 40px;
+        height: 2px;
+        background: #c9a84c;
+        margin-bottom: 2rem;
+      }
+
+      .info-row {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .info-item .label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #666;
+        margin-bottom: 0.25rem;
+      }
+
+      .info-item .value {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #d0d0d0;
+      }
+
+      .cta {
+        display: inline-block;
+        background: #c9a84c;
+        color: #0d0d0d;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        padding: 0.75rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: default;
+      }
+
+      footer {
+        margin-top: auto;
+        text-align: center;
+        padding: 1.5rem;
+        color: #444;
+        font-size: 0.8rem;
+        border-top: 1px solid #1e1e1e;
+      }
+
+      @media (max-width: 480px) {
+        .hero { height: 55vh; }
+        .hero-text h1 { font-size: 2.2rem; }
+        .services { grid-template-columns: 1fr; }
+        .info-row { gap: 1.25rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <img src="MER-187.jpg" alt="Banh Barber" />
+      <div class="hero-overlay">
+        <div class="hero-text">
+          <h1>Banh Barber</h1>
+          <div class="tagline">Cắt tóc &mdash; Tạo phong cách</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <p class="section-title">Dịch vụ</p>
+      <div class="services">
+        <div class="service-item">
+          <span class="service-name">Cắt tóc nam</span>
+          <span class="service-price">80k</span>
+        </div>
+        <div class="service-item">
+          <span class="service-name">Cạo râu</span>
+          <span class="service-price">50k</span>
+        </div>
+        <div class="service-item">
+          <span class="service-name">Combo</span>
+          <span class="service-price">120k</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="info-row">
+        <div class="info-item">
+          <div class="label">Địa chỉ</div>
+          <div class="value">Demo, TP. HCM</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Giờ mở cửa</div>
+          <div class="value">08:00 – 20:00</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Đường dẫn</div>
+          <div class="value">/banh-barber</div>
+        </div>
+      </div>
+
+      <span class="cta">Đặt lịch ngay</span>
+    </div>
+
+    <footer>bao.demo.vn &mdash; Banh Barber</footer>
+  </body>
+</html>

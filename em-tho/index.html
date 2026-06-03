@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Em Tho</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #fdf6f0;
+        color: #2c1810;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 70vh;
+        overflow: hidden;
+      }
+
+      .hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.55) 100%);
+        display: flex;
+        align-items: flex-end;
+        padding: 2.5rem;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      }
+
+      .hero-text p {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        color: rgba(255,255,255,0.8);
+        font-style: italic;
+      }
+
+      .content {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #b85c3a;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f0d5c8;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .info-card {
+        background: #fff;
+        border: 1px solid #f0d5c8;
+        border-radius: 12px;
+        padding: 1.25rem;
+      }
+
+      .info-card .label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #b85c3a;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+      }
+
+      .info-card .value {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #2c1810;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #b85c3a;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        margin-top: 1rem;
+      }
+
+      footer {
+        margin-top: auto;
+        text-align: center;
+        padding: 1.5rem;
+        color: #c4a090;
+        font-size: 0.8rem;
+        border-top: 1px solid #f0d5c8;
+      }
+
+      @media (max-width: 480px) {
+        .hero { height: 55vh; }
+        .hero-text h1 { font-size: 2rem; }
+        .info-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <img src="MER-87.jpg" alt="Em Tho" />
+      <div class="hero-overlay">
+        <div class="hero-text">
+          <h1>Em Tho</h1>
+          <p>Demo project &mdash; bao.demo.vn</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <p class="section-title">Thông tin</p>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">Tên dự án</div>
+          <div class="value">Em Tho</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Đường dẫn</div>
+          <div class="value">/em-tho</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Trạng thái</div>
+          <div class="value">Demo</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Môi trường</div>
+          <div class="value">bao.demo.vn</div>
+        </div>
+      </div>
+      <span class="badge">Demo Project</span>
+    </div>
+
+    <footer>bao.demo.vn &mdash; Em Tho</footer>
+  </body>
+</html>
