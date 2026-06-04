@@ -4,26 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bao Demo</title>
+    <link rel="icon" type="image/png" href="/fav-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
       :root {
-        --bg: #f7f5f2;
-        --surface: #ffffff;
-        --border: #e4e0da;
-        --text: #2a2420;
-        --muted: #a09890;
-        --accent: #c0392b;
+        --bg: #F7F7F8;
+        --surface: #FBFBFC;
+        --border: #DEDCE0;
+        --text: #414144;
+        --muted: #ABA8AF;
+        --accent: #490383;
+        --accent-light: #FBF5FF;
+        --secondary: #F25C05;
       }
 
       html { scroll-behavior: smooth; }
 
       body {
-        font-family: 'Inter', sans-serif;
-        background: var(--bg);
+        font-family: 'Roboto', sans-serif;
+        background:
+          radial-gradient(ellipse 75% 55% at 5% 0%, rgba(100, 60, 220, 0.07) 0%, transparent 65%),
+          radial-gradient(ellipse 55% 45% at 95% 100%, rgba(73, 3, 131, 0.05) 0%, transparent 60%),
+          var(--bg);
         color: var(--text);
         min-height: 100vh;
         display: grid;
@@ -33,24 +39,18 @@
 
       /* ── HEADER ───────────────────────────────────────── */
       header {
-        padding: 2.5rem 3rem;
+        padding: 2.5rem 1.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid var(--border);
+        background: #ffffff;
       }
 
-      .logo {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--text);
-        letter-spacing: 0.02em;
-      }
-
-      .logo em {
-        font-style: italic;
-        color: var(--accent);
+      .logo img {
+        height: 100px;
+        width: auto;
+        display: block;
       }
 
       .header-tag {
@@ -63,7 +63,6 @@
       /* ── HERO ─────────────────────────────────────────── */
       .hero {
         padding: 5rem 3rem 4rem;
-        border-bottom: 1px solid var(--border);
       }
 
       .hero-inner {
@@ -73,18 +72,17 @@
       }
 
       .hero h2 {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(2.8rem, 5vw, 4.5rem);
+        font-family: 'Comfortaa', cursive;
+        font-size: clamp(2rem, 5vw, 4rem);
         font-weight: 400;
-        line-height: 1.08;
+        line-height: 1.15;
         letter-spacing: -0.02em;
         color: var(--text);
         margin-bottom: 1.5rem;
-      }
-
-      .hero h2 em {
-        font-style: italic;
-        color: var(--accent);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
       }
 
       .hero p {
@@ -94,6 +92,43 @@
         line-height: 1.75;
         max-width: 420px;
         margin: 0 auto;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-color: #414144;
+        background: rgba(231, 212, 247, 0.08);
+        border: 1px solid rgba(209, 162, 249, 0.18);
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+        margin-bottom: 1.25rem;
+      }
+
+      .flip-words {
+        display: inline-block;
+        perspective: 600px;
+      }
+
+      .flip-word {
+        display: inline-block;
+        color: var(--accent);
+        white-space: nowrap;
+        backface-visibility: hidden;
+      }
+
+      @keyframes flipIn {
+        from { transform: rotateX(-90deg); opacity: 0; }
+        to   { transform: rotateX(0deg);   opacity: 1; }
+      }
+
+      @keyframes flipOut {
+        from { transform: rotateX(0deg);  opacity: 1; }
+        to   { transform: rotateX(90deg); opacity: 0; }
       }
 
       /* ── CATALOG ──────────────────────────────────────── */
@@ -129,109 +164,120 @@
       .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        border-left: 1px solid var(--border);
-        border-right: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
+        gap: 1.5rem;
       }
 
       .card {
-        padding: 2.25rem 2rem;
-        border-right: 1px solid var(--border);
+        background: var(--surface);
+        border-radius: 12px;
+        overflow: hidden;
         text-decoration: none;
         color: inherit;
         display: flex;
         flex-direction: column;
-        gap: 0;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        transition: box-shadow 0.25s, transform 0.25s;
         position: relative;
-        overflow: hidden;
-        transition: background 0.2s;
       }
 
-      .card:last-of-type { border-right: none; }
-
-      .card::after {
-        content: '';
+      .card-badge {
         position: absolute;
-        bottom: 0; left: 0; right: 0;
-        height: 2px;
-        background: var(--accent);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.3s ease;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: 1;
+        font-size: 0.85rem;
+        font-weight: 400;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--text);
+        background: rgba(255, 255, 255, 100);
+        backdrop-filter: blur(1px);
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
       }
 
-      .card:hover { background: #faf8f5; }
-      .card:hover::after { transform: scaleX(1); }
-      .card:hover .card-arrow { opacity: 1; transform: translate(3px, -3px); }
+      .card:hover {
+        box-shadow: 0 8px 28px rgba(73, 3, 131, 0.13);
+        transform: translateY(-3px);
+      }
 
-      .card-num {
-        font-size: 0.62rem;
-        font-weight: 400;
-        color: var(--muted);
-        letter-spacing: 0.1em;
-        margin-bottom: 2rem;
+      .card-image {
+        aspect-ratio: 4 / 3;
+        background: var(--border);
+        overflow: hidden;
+      }
+
+      .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+
+      .card:hover .card-image img {
+        transform: scale(1.04);
+      }
+
+      .card-body {
+        padding: 1.25rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
       }
 
       .card-name {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.9rem;
-        font-weight: 600;
+        font-family: 'Comfortaa', cursive;
+        font-size: 0.95rem;
+        font-weight: 700;
         color: var(--text);
-        line-height: 1.1;
-        letter-spacing: -0.01em;
-        margin-bottom: 0.75rem;
-      }
-
-      .card-tag {
-        display: inline-block;
-        font-size: 0.65rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--accent);
-        background: rgba(192, 57, 43, 0.07);
-        padding: 0.25rem 0.6rem;
-        border-radius: 2px;
-        margin-bottom: 1rem;
-        align-self: flex-start;
-      }
-
-      .card-desc {
-        font-size: 0.8rem;
-        font-weight: 300;
-        color: var(--muted);
-        line-height: 1.65;
+        line-height: 1.35;
+        margin-bottom: 1.1rem;
         flex: 1;
       }
 
-      .card-footer {
+      .card-meta {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+
+      .card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .card-client,
+      .card-category {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        margin-top: 2rem;
-        padding-top: 1.25rem;
-        border-top: 1px solid var(--border);
-      }
-
-      .card-link {
+        gap: 0.4rem;
         font-size: 0.72rem;
-        font-weight: 500;
-        color: var(--text);
-        letter-spacing: 0.02em;
+        color: var(--muted);
+        font-weight: 400;
       }
 
-      .card-arrow {
-        font-size: 1rem;
-        color: var(--accent);
-        opacity: 0;
-        transition: opacity 0.2s, transform 0.2s;
-        line-height: 1;
+      .card-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: background 0.2s;
       }
+
+      .card:hover .card-btn { background: var(--secondary); }
 
       /* ── FOOTER ───────────────────────────────────────── */
       footer {
         padding: 2rem 3rem;
-        border-top: 1px solid var(--border);
+        border-top: 0cap solid var(--border);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -245,84 +291,141 @@
 
       /* ── RESPONSIVE ───────────────────────────────────── */
       @media (max-width: 768px) {
-        header, .hero, .catalog, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
-        .hero { padding-top: 3rem; }
+        header, .hero, .catalog, footer { padding-left: 1.5rem; padding-right: 1.5rem;padding-bottom: 1rem }
+        .hero { padding-top: 3rem; padding-bottom: 1.5rem; }
         .catalog { padding-bottom: 2.5rem; }
-        .grid { grid-template-columns: 1fr; border-left: none; border-right: none; }
-        .card { border-right: none; border-bottom: 1px solid var(--border); }
-        .card:last-of-type { border-bottom: none; }
+        .grid { grid-template-columns: 1fr; }
+        .hero h2 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
       }
 
       @media (min-width: 769px) and (max-width: 1024px) {
         .grid { grid-template-columns: repeat(2, 1fr); }
-        .card:nth-child(2n) { border-right: none; }
-        .card:nth-child(n+3) { border-top: 1px solid var(--border); }
       }
     </style>
   </head>
   <body>
 
     <header>
-      <div class="logo">Bao<em>.</em></div>
-      <span class="header-tag">bao.demo.vn</span>
+      <div class="logo"><img src="/logo.svg" alt="BAO Solutions"></div>
     </header>
 
     <div>
       <div class="hero">
         <div class="hero-inner">
-          <h2>Những dự án của<br/><em>BAO Solutions</em></h2>
-          <p>Tập hợp các demo và prototype — mỗi dự án một câu chuyện, một phong cách riêng.</p>
+          <div class="hero-badge">Our Portfolio</div>
+          <h2><span>We engineer your</span><span class="flip-words"><span class="flip-word">Design &amp; <span style="color:#F25C05">Rebranding</span></span></span></h2>
         </div>
       </div>
 
       <div class="catalog">
-        <div class="catalog-header">
-          <span>Tất cả dự án</span>
-        </div>
 
         <div class="grid">
-          <a class="card" href="/em-tho/">
-            <span class="card-num">01</span>
-            <span class="card-name">Em Tho</span>
-            <span class="card-tag">Demo</span>
-            <span class="card-desc">Demo project</span>
-            <div class="card-footer">
-              <span class="card-link">Xem ngay</span>
-              <span class="card-arrow">↗</span>
-            </div>
-          </a>
+
 
           <a class="card" href="/banh-barber/">
-            <span class="card-num">02</span>
-            <span class="card-name">Banh Barber</span>
-            <span class="card-tag">Demo</span>
-            <span class="card-desc">Demo project</span>
-            <div class="card-footer">
-              <span class="card-link">Xem ngay</span>
-              <span class="card-arrow">↗</span>
+            <span class="card-badge">Booking Appointment</span>
+            <div class="card-image"><img src="/banh-barber/banh-barber.jpg" alt="Banh Barber"></div>
+            <div class="card-body">
+              <h3 class="card-name">Banh Barber</h3>
+              <div class="card-meta">
+                <div class="card-info">
+                  <span class="card-client">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                    Premium Barbershop
+                  </span>
+                  <span class="card-category">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
+                    Sydney, Australia
+                  </span>
+                </div>
+                <div class="card-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </div>
+              </div>
             </div>
           </a>
 
           <a class="card" href="/bhuda/">
-            <span class="card-num">03</span>
-            <span class="card-name">Bhuda</span>
-            <span class="card-tag">Demo</span>
-            <span class="card-desc">Demo project</span>
-            <div class="card-footer">
-              <span class="card-link">Xem ngay</span>
-              <span class="card-arrow">↗</span>
+            <span class="card-badge">Delivery & Checkout</span>
+            <div class="card-image"><img src="/bhuda/bhuda.jpg" alt="Bhuda &amp; Co"></div>
+            <div class="card-body">
+              <h3 class="card-name">Bhuda &amp; Co</h3>
+              <div class="card-meta">
+                <div class="card-info">
+                  <span class="card-client">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                    Asian Vegan Restaurant
+                  </span>
+                  <span class="card-category">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
+                    Sydney, Australia
+                  </span>
+                </div>
+                <div class="card-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </div>
+              </div>
             </div>
           </a>
 
-          <!-- New project: copy the <a> block above and update num/name/desc -->
+          <a class="card" href="/em-tho/">
+            <span class="card-badge">                    CMS &amp; Checkout
+</span>
+            <div class="card-image"><img src="/em-tho/em-tho.jpg" alt="Em Tho"></div>
+            <div class="card-body">
+              <h3 class="card-name">Em Tho</h3>
+              <div class="card-meta">
+                <div class="card-info">
+                  <span class="card-client">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                    GenZ Lipstick Brand
+                  </span>
+                  <span class="card-category">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
+                    Saigon, Vietnam
+                  </span>
+                </div>
+                <div class="card-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- New project: copy the <a> block above and update name/client/category -->
         </div>
       </div>
     </div>
 
     <footer>
-      <p>bao.demo.vn</p>
+      <p></p>
       <p>&copy; 2025</p>
     </footer>
 
+  <script>
+    (function () {
+      const words = [
+        'Design & <span style="color:#F25C05">Rebranding</span>',
+        '<span style="color:#F25C05">CMS</span> & SEO',
+        'Analytics & <span style="color:#F25C05">Tracking</span>',
+        'Booking <span style="color:#F25C05">Appointment</span>',
+        'Checkout <span style="color:#F25C05">Functionality</span>',
+        'Third-Party <span style="color:#F25C05">Integration</span>'
+      ];
+      let idx = 0;
+      const el = document.querySelector('.flip-word');
+
+      function next() {
+        el.style.animation = 'flipOut 0.25s ease-in forwards';
+        setTimeout(function () {
+          idx = (idx + 1) % words.length;
+          el.innerHTML = words[idx];
+          el.style.animation = 'flipIn 0.25s ease-out forwards';
+        }, 250);
+      }
+
+      setInterval(next, 2500);
+    })();
+  </script>
   </body>
 </html>
